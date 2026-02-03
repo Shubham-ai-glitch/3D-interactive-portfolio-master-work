@@ -1,20 +1,9 @@
 "use client";
-import { ReactLenis, useLenis } from '@studio-freight/react-lenis'
-import { useEffect } from 'react';
+import React from "react";
 
+// Library missing hone ki wajah se simple wrapper use kar rahe hain
 function SmoothScroll({ children }: { children: React.ReactNode }) {
-  const lenis = useLenis(({ scroll }) => {})
-
-  useEffect(() => {
-    if (lenis) {
-      // Scroll logic
-    }
-  }, [lenis]); // Lenis dependency added
-
-  return (
-    <ReactLenis root>
-      {children}
-    </ReactLenis>
-  )
+  return <>{children}</>;
 }
+
 export default SmoothScroll;
