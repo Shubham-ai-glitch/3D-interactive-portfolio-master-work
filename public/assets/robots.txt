@@ -1,0 +1,14 @@
+# Googlebot-Image ko batane ke liye ki kaunsi photos dikhani hain
+User-agent: Googlebot-Image
+Allow: /assets/shubham-singh-frontend-developer.jpg
+Allow: /assets/shubham-singh-kanpur-neet-student.jpg
+Allow: /assets/shubham-singh-cybersecurity-expert.jpg
+
+# In personal documents ko search results mein mat dikhao
+Disallow: /assets/cert1.jpg
+Disallow: /assets/cert2.jpg
+Disallow: /assets/resume.pdf
+
+# Baaki sabhi search engines ke liye puri site allow hai
+User-agent: *
+Allow: /
