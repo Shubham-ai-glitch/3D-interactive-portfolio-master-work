@@ -1,33 +1,50 @@
-const config = {
-  title: "Shubham Singh | Senior Frontend Developer & Cybersecurity Expert",
-  description: {
-    [span_0](start_span)long: "I am a highly motivated 11th-grade student and NEET aspirant at Aakash Institute, Kanpur[span_0](end_span). [span_1](start_span)A passionate Frontend Developer and Cybersecurity Enthusiast focused on building secure, user-centric web applications and bridging the gap between Healthcare and Technology[span_1](end_span).",
-    short:
-      [span_2](start_span)"Frontend Developer & NEET Aspirant from Kanpur, specializing in secure web solutions and AI automation[span_2](end_span).",
-  },
-  keywords: [
-    "Shubham Singh",
-    "Shubham Singh Kanpur",
-    "Shubhams872-spec",
-    "Frontend Developer Kanpur",
-    "NEET Aspirant Coder",
-    "Cybersecurity Enthusiast",
-    "Ethical Hacking Portfolio",
-    "shubham-dev-tech.netlify.app",
-    "React Developer",
-    "Python Automation",
-  ],
-  author: "Shubham Singh",
-  [span_3](start_span)email: "shubhamsingh9415191609@gmail.com",[span_3](end_span)
-  site: "https://shubham-dev-tech.netlify.app",
+import React from "react";
+import { SiGithub, SiTelegram } from "react-icons/si";
+import { config } from "@/data/config";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-  get ogImg() {
-    return this.site + "/assets/shubham-singh-kanpur-frontend-developer.jpg";
-  },
-  social: {
-    // Instagram yahan se hata diya gaya hai
-    [span_4](start_span)telegram: "https://t.me/Shubhams872",[span_4](end_span)
-    [span_5](start_span)github: "https://github.com/Shubhams872-spec",[span_5](end_span)
-  },
+const SocialMediaIcons = () => {
+  const socials = [
+    {
+      name: "GitHub",
+      href: config.social.github, // Shubham-ai-glitch
+      icon: <SiGithub size={24} />,
+      keyword: "Explore My Code & AI Projects",
+    },
+    {
+      name: "Telegram",
+      href: config.social.telegram, // @Shubhams872
+      icon: <SiTelegram size={24} />,
+      keyword: "Connect for Cybersecurity Queries",
+    },
+  ];
+
+  return (
+    <div className="flex gap-5 items-center">
+      {socials.map((social) => (
+        <Tooltip key={social.name} delayDuration={300}>
+          <TooltipTrigger asChild>
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-white transition-all duration-300 hover:scale-110"
+              aria-label={social.name}
+            >
+              {social.icon}
+            </a>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" className="bg-zinc-900 border-zinc-800 text-blue-400 font-mono text-xs">
+            <p>{social.keyword}</p>
+          </TooltipContent>
+        </Tooltip>
+      ))}
+    </div>
+  );
 };
-export { config };
+
+export default SocialMediaIcons;
