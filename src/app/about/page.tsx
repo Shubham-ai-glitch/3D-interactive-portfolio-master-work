@@ -1,71 +1,53 @@
-"use client";
-import React, { useEffect, useState } from "react";
-// Sahi icons import karein
-import { 
-  FaEnvelope, FaGithub, FaPhone, FaReact, FaNodeJs, FaHtml5, FaCss3, FaPython, FaTerminal 
-} from "react-icons/fa6";
-import { SiJavascript, SiTypescript, SiTailwindcss, SiNextdotjs, SiTelegram } from "react-icons/si";
+import React from "react";
+import { config } from "@/data/config";
 
-// @ts-ignore
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
+const AboutPage = () => {
+  return (
+    <main className="min-h-screen bg-black text-white py-20 px-6">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-16">
+          <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-red-500">
+            About Me
+          </h1>
+          <p className="text-zinc-500 mt-2 font-mono italic">Kanpur, Uttar Pradesh</p>
+        </div>
 
-const CONTACT_LINKS = [
-  {
-    name: "Email",
-    content: "shubhamsingh9415191609@gmail.com", // Aapki verified email
-    href: "mailto:shubhamsingh9415191609@gmail.com",
-    icon: <FaEnvelope className="h-8 w-8" />,
-  },
-  {
-    name: "Telegram",
-    content: "@Shubhams872", // Aapka Telegram handle
-    href: "https://t.me/Shubhams872",
-    icon: <SiTelegram className="h-8 w-8 text-[#0088cc]" />,
-  },
-  {
-    name: "GitHub",
-    href: "https://github.com/Shubhams872-spec", // Aapka GitHub
-    content: "/Shubhams872-spec",
-    icon: <FaGithub className="h-8 w-8" />,
-  },
-];
+        <div className="grid md:grid-cols-2 gap-12">
+          <div className="space-y-6">
+            <div className="rounded-3xl border border-zinc-800 overflow-hidden">
+              <img src="/assets/shubham-singh-kanpur-neet-student.jpg" alt="NEET Aspirant" className="w-full h-auto" />
+              <div className="p-4 bg-zinc-900/50"><p className="text-blue-400 text-sm font-mono">NEET Aspirant @ Aakash Institute</p></div>
+            </div>
+            <div className="rounded-3xl border border-zinc-800 overflow-hidden">
+              <img src="/assets/shubham-singh-cybersecurity-expert.jpg" alt="Cyber Expert" className="w-full h-auto" />
+              <div className="p-4 bg-zinc-900/50"><p className="text-red-400 text-sm font-mono">Certified Cybersecurity Educator (CCEP)</p></div>
+            </div>
+          </div>
 
-const TOOLS = [
-  {
-    name: "Python",
-    content: "Used for Cybersecurity automation and Ethical Hacking scripts.",
-    icon: <FaPython size={"50px"} color={"#3776ab"} />,
-    color: "#3776ab",
-  },
-  {
-    name: "Ethical Hacking",
-    content: "Certified Cybersecurity Educator Professional (CCEP).",
-    icon: <FaTerminal size={"50px"} color={"#4af626"} />,
-    color: "#4af626",
-  },
-  {
-    name: "React.js",
-    content: "Specialized in building high-performance medical-tech web apps.",
-    icon: <FaReact size={"50px"} color="#61dafb" />,
-    color: "#61dafb",
-  },
-  {
-    name: "TypeScript",
-    content: "Type-safe development for complex frontend architectures.",
-    icon: <SiTypescript size={"50px"} color={"#007acc"} />,
-    color: "#007acc",
-  },
-  {
-    name: "Next.js",
-    content: "React framework used for SEO-optimized professional portfolios.",
-    icon: <SiNextdotjs size={"50px"} color="#ffffff" />,
-    color: "#ffffff",
-  },
-  {
-    name: "Tailwind CSS",
-    content: "Used for creating modern, responsive UI designs.",
-    icon: <SiTailwindcss size={"50px"} color="#38bdf8" />,
-    color: "#38bdf8",
-  },
-];
+          <div className="space-y-8">
+            <div className="bg-zinc-900/30 p-8 rounded-3xl border border-zinc-800">
+              <h2 className="text-2xl font-bold mb-4">The Student & The Coder</h2>
+              <p className="text-zinc-400 leading-relaxed">
+                Currently in 11th grade (Science - PCB), I am preparing for NEET while maintaining a professional career in Tech. 
+                I scored <span className="text-white font-bold">87% in Class 10th</span>. 
+                My focus is on <span className="text-white font-bold">Frontend Development</span> and <span className="text-white font-bold">Ethical Hacking</span>.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-6 border border-zinc-800 rounded-2xl text-center">
+                <p className="text-3xl font-bold text-blue-500">87%</p>
+                <p className="text-xs text-zinc-500 uppercase mt-1">10th Score</p>
+              </div>
+              <div className="p-6 border border-zinc-800 rounded-2xl text-center text-red-500">
+                <p className="text-3xl font-bold">CCEP</p>
+                <p className="text-xs text-zinc-500 uppercase mt-1">Certified Educator</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default AboutPage;
