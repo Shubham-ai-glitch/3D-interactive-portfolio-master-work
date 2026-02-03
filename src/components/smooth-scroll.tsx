@@ -1,40 +1,20 @@
 "use client";
+import { ReactLenis, useLenis } from '@studio-freight/react-lenis'
+import { useEffect } from 'react';
 
-import React, { useEffect } from "react";
-import { ReactLenis, useLenis } from "@/lib/lenis";
-
-interface LenisProps {
-  children: React.ReactNode;
-  isInsideModal?: boolean;
-}
-
-function SmoothScroll({ children, isInsideModal = false }: LenisProps) {
-  const lenis = useLenis(({ scroll }) => {
-    // called every scroll
-  });
+function SmoothScroll({ children }: { children: React.ReactNode }) {
+  const lenis = useLenis(({ scroll }) => {})
 
   useEffect(() => {
-    document.addEventListener("DOMContentLoaded", () => {
-      lenis?.stop();
-      lenis?.start();
-    });
-  }, []);
+    if (lenis) {
+      // Scroll logic
+    }
+  }, [lenis]); // Lenis dependency added
 
   return (
-    <ReactLenis
-      root
-      options={{
-        duration: 2,
-        prevent: (node) => {
-          if (isInsideModal) return true;
-          const modalOpen = node.classList.contains("modall");
-          return modalOpen;
-        },
-      }}
-    >
+    <ReactLenis root>
       {children}
     </ReactLenis>
-  );
+  )
 }
-
 export default SmoothScroll;
