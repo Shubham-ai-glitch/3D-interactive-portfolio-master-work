@@ -1,48 +1,33 @@
 const config = {
-  title: "Abhijit Zende | AI Enthusiast",
+  title: "Shubham Singh | Senior Frontend Developer & Cybersecurity Expert",
   description: {
-    long: "Explore the portfolio of Abhijit, a Computer Science Engineer with 1.5 year experience in Devlopment, DevOps & Database management with hands-on experience in deploying & automating workflows, & collaborating with foreign clients. Strong analytical skills, effective communication, and a team-oriented approach to driving process improvements and delivering results.",
+    long: "I am a highly motivated 11th-grade student and NEET aspirant at Aakash Institute, Kanpur. A passionate Frontend Developer and Cybersecurity Enthusiast focused on building secure, user-centric web applications and bridging the gap between Healthcare and Technology.",
     short:
-      "Discover the portfolio of Abhijit, a AI enthusiast solving real life problems in DevOps and Development.",
+      "Frontend Developer & NEET Aspirant from Kanpur, specializing in secure web solutions and AI automation.",
   },
   keywords: [
-    "Abhijit",
-    "Abhijit Zende",
-    "abhijitzende",
-    "abhijitzende.com",
-    "Abhijit Zende portfolio",
-    "portfolio",
-    "DevOps",
-    "Devlopment",
-    "Database",
-    "AI Docker file optimizer",
-    "Finance me",
-    "creative technologist",
-    "web development",
-    "interactive websites",
-    // "GSAP",
-    // "React",
-    // "Next.js",
-    // "Spline",
-    // "Framer Motion",
-    "AWS",
-    "DevSecOps",
-    "AIOps",
-    "Azure",
+    "Shubham Singh",
+    "Shubham Singh Kanpur",
+    "Shubhams872-spec",
+    "Frontend Developer Kanpur",
+    "NEET Aspirant Coder",
+    "Cybersecurity Enthusiast",
+    "Ethical Hacking Portfolio",
+    "shubham-dev-tech.netlify.app",
+    "React Developer",
+    "Python Automation",
   ],
-  author: "Abhijit Zende",
-  email: "abhijitzende75@gmail.com",
-  site: "https://abhijitzende.com",
+  author: "Shubham Singh",
+  email: "shubhamsingh9415191609@gmail.com",
+  site: "https://shubham-dev-tech.netlify.app",
 
   get ogImg() {
-    return this.site + "/assets/seo/og-image.png";
+    return this.site + "/assets/shubham-singh-kanpur-frontend-developer.jpg";
   },
   social: {
-    twitter: "https://x.com/_Abhi_Speaks/",
-    linkedin: "https://www.linkedin.com/in/zende-abhijit/",
-    instagram: "https://www.instagram.com/_.celestial_abhi._/",
-    facebook: "https://www.facebook.com/profile.php?id=100010029821759",
-    github: "https://github.com/Abhiz2411/",
+    // Sirf Telegram aur GitHub rakha hai, Instagram hata diya gaya hai
+    telegram: "https://t.me/Shubhams872",
+    github: "https://github.com/Shubhams872-spec",
   },
 };
 export { config };
