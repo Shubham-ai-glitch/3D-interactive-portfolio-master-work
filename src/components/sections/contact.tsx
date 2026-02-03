@@ -1,54 +1,45 @@
 "use client";
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import ContactForm from "../ContactForm";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { Mail, Send, Github } from "lucide-react";
 import { config } from "@/data/config";
-const ContactSection = () => {
+
+const Contact = () => {
   return (
-    <section id="contact" className="min-h-screen max-w-7xl mx-auto ">
-      <Link href={"#contact"}>
-        <h2
-          className={cn(
-            "bg-clip-text text-4xl text-center text-transparent md:text-7xl pt-16",
-            "bg-gradient-to-b from-black/80 to-black/50",
-            "dark:bg-gradient-to-b dark:from-white/80 dark:to-white/20 dark:bg-opacity-50"
-          )}
-        >
-          LET&apos;S WORK <br />
-          TOGETHER
+    <section id="contact" className="py-24 px-6 bg-zinc-950/20">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-red-500">
+          Get In Touch
         </h2>
-      </Link>
-      <div className="grid grid-cols-1 md:grid-cols-2 z-[9999]">
-        <Card className="min-w-7xl bg-white/70 dark:bg-black/70 backdrop-blur-sm rounded-xl mt-10 md:mt-20">
-          <CardHeader>
-            <CardTitle className="text-4xl">Contact Form</CardTitle>
-            <CardDescription>
-              Please contact me directly at{" "}
-              <a
-                target="_blank"
-                href={`mailto:${config.email}`}
-                className="text-gray-200 cursor-can-hover rounded-lg"
-              >
-                {config.email.replace(/@/g, "(at)")}
-              </a>{" "}
-              or drop your info here.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <ContactForm />
-          </CardContent>
-        </Card>
+        <p className="text-zinc-400 text-lg mb-12">
+          Whether you have a medical-tech project idea or a cybersecurity concern, my inbox is always open.
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {/* Email Card */}
+          <a href={`mailto:${config.email}`} className="group p-8 rounded-3xl border border-zinc-800 bg-zinc-900/30 hover:border-blue-500 transition-all">
+            <Mail className="mx-auto mb-4 text-blue-500 group-hover:scale-110 transition-transform" size={40} />
+            <h3 className="font-bold text-white">Email Me</h3>
+            <p className="text-xs text-zinc-500 mt-2 break-all">{config.email}</p>
+          </a>
+
+          {/* Telegram Card */}
+          <a href={config.social.telegram} target="_blank" className="group p-8 rounded-3xl border border-zinc-800 bg-zinc-900/30 hover:border-blue-400 transition-all">
+            <Send className="mx-auto mb-4 text-[#0088cc] group-hover:scale-110 transition-transform" size={40} />
+            <h3 className="font-bold text-white">Telegram</h3>
+            <p className="text-xs text-zinc-500 mt-2">@Shubhams872</p>
+          </a>
+
+          {/* GitHub Card */}
+          <a href={config.social.github} target="_blank" className="group p-8 rounded-3xl border border-zinc-800 bg-zinc-900/30 hover:border-white transition-all">
+            <Github className="mx-auto mb-4 text-white group-hover:scale-110 transition-transform" size={40} />
+            <h3 className="font-bold text-white">GitHub</h3>
+            <p className="text-xs text-zinc-500 mt-2">Shubham-ai-glitch</p>
+          </a>
+        </div>
       </div>
     </section>
   );
 };
-export default ContactSection;
+
+export default Contact;
