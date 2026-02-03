@@ -1,35 +1,38 @@
 import React from "react";
-import Link from "next/link";
-import { footer } from "./config";
-import { Button } from "../ui/button";
-import SocialMediaButtons from "../social/social-media-icons";
 import { config } from "@/data/config";
+import { Github, Send, Mail } from "lucide-react";
 
-function Footer() {
-  const year = new Date().getFullYear();
+const Footer = () => {
   return (
-    <footer className="flex w-full shrink-0 flex-col items-center gap-2 border-t border-border px-4 py-6 sm:flex-row md:px-6 sm:justify-between">
-      <p className="text-xs text-gray-500 dark:text-gray-400">
-        © {year} <Link href="https://shubham-dev-tech.netlify.app/" className="hover:underline">{config.author}</Link>. All rights reserved.
-      </p>
-      {/* Ye component icons dikha raha hai */}
-      <SocialMediaButtons />
-      <nav className="flex gap-4 sm:gap-6 z-10">
-        {footer.map((link, index) => {
-          const { title, href } = link;
-          return (
-            <Link
-              className="text-xs underline-offset-4 hover:underline"
-              href={href}
-              key={`l_${index}`}
-            >
-              <Button variant={"link"}>{title}</Button>
-            </Link>
-          );
-        })}
-      </nav>
+    <footer className="py-12 border-t border-zinc-900 bg-black">
+      <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="text-center md:text-left">
+          <h2 className="text-xl font-bold font-display tracking-tighter">
+            SHUBHAM <span className="text-blue-500 text-xs">AI-GLITCH</span>
+          </h2>
+          <p className="text-zinc-500 text-sm mt-1">
+            © {new Date().getFullYear()} Shubham Singh. All rights reserved.
+          </p>
+        </div>
+
+        <div className="flex gap-6">
+          <a href={config.social.github} target="_blank" className="text-zinc-500 hover:text-white transition-colors">
+            <Github size={20} />
+          </a>
+          <a href={config.social.telegram} target="_blank" className="text-zinc-500 hover:text-[#0088cc] transition-colors">
+            <Send size={20} />
+          </a>
+          <a href={`mailto:${config.email}`} className="text-zinc-500 hover:text-blue-500 transition-colors">
+            <Mail size={20} />
+          </a>
+        </div>
+        
+        <p className="text-xs font-mono text-zinc-700">
+          Built with Next.js & TypeScript
+        </p>
+      </div>
     </footer>
   );
-}
+};
 
 export default Footer;
