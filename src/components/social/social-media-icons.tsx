@@ -1,43 +1,33 @@
-"use client";
-
-import { useInView } from "framer-motion";
-import React, { useRef } from "react";
-import { Button } from "../ui/button";
-import { SiGithub, SiInstagram, SiTelegram } from "react-icons/si"; // Sirf wahi icons jo chahiye
-import { config } from "@/data/config";
-import Link from "next/link";
-
-const BUTTONS = [
-  {
-    name: "Github",
-    href: config.social.github,
-    icon: <SiGithub size={"24"} color={"#fff"} />,
+const config = {
+  title: "Shubham Singh | Senior Frontend Developer & Cybersecurity Expert",
+  description: {
+    [span_0](start_span)long: "I am a highly motivated 11th-grade student and NEET aspirant at Aakash Institute, Kanpur[span_0](end_span). [span_1](start_span)A passionate Frontend Developer and Cybersecurity Enthusiast focused on building secure, user-centric web applications and bridging the gap between Healthcare and Technology[span_1](end_span).",
+    short:
+      [span_2](start_span)"Frontend Developer & NEET Aspirant from Kanpur, specializing in secure web solutions and AI automation[span_2](end_span).",
   },
-  {
-    name: "Instagram",
-    href: config.social.instagram,
-    icon: <SiInstagram size={"24"} color={"#fff"} />,
-  },
-  {
-    name: "Telegram",
-    href: "https://t.me/Shubhams872", // Aapka telegram handle
-    icon: <SiTelegram size={"24"} color={"#fff"} />,
-  },
-];
+  keywords: [
+    "Shubham Singh",
+    "Shubham Singh Kanpur",
+    "Shubhams872-spec",
+    "Frontend Developer Kanpur",
+    "NEET Aspirant Coder",
+    "Cybersecurity Enthusiast",
+    "Ethical Hacking Portfolio",
+    "shubham-dev-tech.netlify.app",
+    "React Developer",
+    "Python Automation",
+  ],
+  author: "Shubham Singh",
+  [span_3](start_span)email: "shubhamsingh9415191609@gmail.com",[span_3](end_span)
+  site: "https://shubham-dev-tech.netlify.app",
 
-const SocialMediaButtons = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const show = useInView(ref, { once: true });
-  return (
-    <div ref={ref} className="z-10 flex gap-2"> 
-      {show &&
-        BUTTONS.map((button) => (
-          <Link href={button.href} key={button.name} target="_blank">
-            <Button variant={"ghost"} size="icon">{button.icon}</Button>
-          </Link>
-        ))}
-    </div>
-  );
+  get ogImg() {
+    return this.site + "/assets/shubham-singh-kanpur-frontend-developer.jpg";
+  },
+  social: {
+    // Instagram yahan se hata diya gaya hai
+    [span_4](start_span)telegram: "https://t.me/Shubhams872",[span_4](end_span)
+    [span_5](start_span)github: "https://github.com/Shubhams872-spec",[span_5](end_span)
+  },
 };
-
-export default SocialMediaButtons;
+export { config };
