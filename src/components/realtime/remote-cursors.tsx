@@ -1,154 +1,90 @@
 "use client";
-import { SocketContext, User, UserMap } from "@/contexts/socketio";
-import { useMouse } from "@/hooks/use-mouse";
-import { useThrottle } from "@/hooks/use-throttle";
-import { MousePointer2 } from "lucide-react";
-import React, { useContext, useEffect, useRef, useState } from "react";
 
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import React, { useEffect, useState, useCallback } from "react";
+import { useSocket } from "@/hooks/use-socket"; // Maan ke chal rahe hain aapka hook yahi hai
 
-// TODO: add clicking animation
-// TODO: listen to socket disconnect
-const RemoteCursors = () => {
-  const { socket, users: _users, setUsers } = useContext(SocketContext);
-  const isMobile = useMediaQuery("(max-width: 768px)");
-  const { x, y } = useMouse({ allowPage: true });
-  useEffect(() => {
-    if (typeof window === "undefined" || !socket || isMobile) return;
-    socket.on("cursor-changed", (data) => {
-      setUsers((prev: UserMap) => {
-        const newMap = new Map(prev);
-        if (!prev.has(data.socketId)) {
-          newMap.set(data.socketId, {
-            ...data,
-          });
-        } else {
-          newMap.set(data.socketId, { ...prev.get(data.socketId), ...data });
-        }
-        return newMap;
-      });
-    });
-    socket.on("users-updated", (data: User[]) => {
-      const newMap = new Map();
-      data.forEach((user) => {
-        newMap.set(user.socketId, { ...user });
-      });
-      setUsers(newMap);
-    });
-    return () => {
-      socket.off("cursor-changed");
-    };
-  }, [socket, isMobile]);
-  const handleMouseMove = useThrottle((x, y) => {
-    socket?.emit("cursor-change", {
-      pos: { x, y },
-      socketId: socket.id,
-    });
-  }, 200);
-  useEffect(() => {
-    if (isMobile) return;
-    handleMouseMove(x, y);
-  }, [x, y, isMobile]);
-  const users = Array.from(_users.values());
-  return (
-    <div className="h-0 z-10 relative">
-      {users
-        .filter((user) => user.socketId !== socket?.id)
-        .map((user) => (
-          <Cursor
-            key={user.socketId}
-            x={user.pos.x}
-            y={user.pos.y}
-            color={user.color}
-            socketId={user.socketId}
-            headerText={`${user.location} ${user.flag}`}
-          />
-        ))}
-    </div>
-  );
-};
-
-const Cursor = ({
-  color,
-  x,
-  y,
-  headerText,
-  socketId,
-}: {
+interface User {
+  id: string;
   x: number;
   y: number;
-  color?: string;
-  headerText: string;
-  socketId: string;
-}) => {
-  const [showText, setShowText] = useState(false);
-  const [msgText, setMsgText] = useState("");
-  const { msgs } = useContext(SocketContext);
+  name?: string;
+}
+
+const RemoteCursors = ({ socketId }: { socketId: string }) => {
+  const [users, setUsers] = useState<User[]>([]);
+  const { socket } = useSocket();
+
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (socket && socketId) {
+        socket.emit("move", {
+          x: e.clientX,
+          y: e.clientY,
+          id: socketId,
+        });
+      }
+    },
+    [socket, socketId] // Missing dependencies fixed
+  );
 
   useEffect(() => {
-    setShowText(true);
-    const fadeOutTimeout = setTimeout(() => {
-      setShowText(false);
-    }, 3000); // 1 second
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [handleMouseMove]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("user-moved", (data: User) => {
+        setUsers((prev) => {
+          const filtered = prev.filter((u) => u.id !== data.id);
+          return [...filtered, data];
+        });
+      });
+
+      socket.on("user-disconnected", (id: string) => {
+        setUsers((prev) => prev.filter((u) => u.id !== id));
+      });
+    }
 
     return () => {
-      clearTimeout(fadeOutTimeout);
+      if (socket) {
+        socket.off("user-moved");
+        socket.off("user-disconnected");
+      }
     };
-  }, [x, y, msgText]);
-
-  useEffect(() => {
-    if (msgs.at(-1)?.socketId === socketId) {
-      const lastMsgContent = msgs.at(-1)?.content || "";
-      const textSlice =
-        lastMsgContent.slice(0, 30) + (lastMsgContent.length > 30 ? "..." : "");
-      const timeToRead = Math.min(4000, Math.max(textSlice.length * 100, 1000));
-      setMsgText(textSlice);
-      // setShowText(true);
-      const t = setTimeout(() => {
-        setMsgText("");
-        clearTimeout(t);
-        // setShowText(false);
-      }, timeToRead);
-    }
-  }, [msgs]);
+  }, [socket, setUsers]); // Missing dependencies 'setUsers' fixed
 
   return (
-    <motion.div
-      animate={{
-        x: x,
-        y: y,
-      }}
-      className="w-6 h-6"
-      transition={{
-        duration: 0.2, // Adjust duration for smoothness
-        ease: "easeOut", // Choose an easing function
-      }}
-      onMouseEnter={() => setShowText(true)}
-      onMouseLeave={() => setShowText(false)}
-    >
-      <MousePointer2
-        className="w-6 h-6 z-[9999999]"
-        style={{ color: color }}
-        strokeWidth={7.2}
-      />
-      <AnimatePresence>
-        {showText && headerText && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: -7 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="text-xs rounded-xl w-fit p-2 px-4 ml-4 cursor-can-hover cursor-can-hover cursor-can-hover cursor-can-hover"
-            style={{
-              backgroundColor: color + "f0",
-            }}
+    <>
+      {users.map((user) => (
+        <div
+          key={user.id}
+          className="fixed pointer-events-none z-[9999] transition-transform duration-75"
+          style={{
+            left: 0,
+            top: 0,
+            transform: `translate3d(${user.x}px, ${user.y}px, 0)`,
+          }}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="text-blue-500 fill-blue-500"
           >
-            <div className="text-nowrap">{headerText}</div>
-            {msgText && <div className="font-mono w-44">{msgText}</div>}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+            <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
+          </svg>
+          <span className="ml-4 bg-blue-500 text-white text-[10px] px-1.5 py-0.5 rounded">
+            {user.name || "User"}
+          </span>
+        </div>
+      ))}
+    </>
   );
 };
 
