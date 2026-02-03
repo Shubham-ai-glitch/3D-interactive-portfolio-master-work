@@ -2,12 +2,21 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import { useMousePosition } from "@/utils/mouse";
 
+interface ParticlesProps {
+  quantity?: number;
+  staticity?: number;
+  ease?: number;
+  refresh?: boolean;
+  className?: string; // Ye line add ki hai error fix karne ke liye
+}
+
 export default function Particles({
   quantity = 30,
   staticity = 50,
   ease = 50,
   refresh = false,
-}) {
+  className = "",
+}: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);
@@ -40,7 +49,7 @@ export default function Particles({
   }, [mousePosition.x, mousePosition.y]);
 
   return (
-    <div className="absolute inset-0 -z-10" ref={canvasContainerRef} aria-hidden="true">
+    <div className={className} ref={canvasContainerRef} aria-hidden="true">
       <canvas ref={canvasRef} />
     </div>
   );
