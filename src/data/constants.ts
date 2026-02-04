@@ -1,4 +1,17 @@
-// Types define karein jo animated-background.tsx ko chahiye
+export const themeDisclaimers = {
+  dark: [
+    "Shubham-ai-glitch mode activated.",
+    "System secured. Welcome to the dark side.",
+    "Eyes saved! Dark mode is on."
+  ],
+  light: [
+    "Flashbang! Light mode enabled.",
+    "System exposed. Brightness 100%.",
+    "Burning my eyes, but okay!"
+  ]
+};
+
+// Baaki SKILLS waisa hi rahega
 export type SkillNames = "React.js" | "Next.js" | "TypeScript" | "Python" | "Cybersecurity" | "Ethical Hacking";
 
 export interface Skill {
@@ -13,9 +26,4 @@ export const SKILLS: Skill[] = [
   { name: "Python", color: "#3776ab" },
   { name: "Cybersecurity", color: "#4af626" },
   { name: "Ethical Hacking", color: "#ff0000" },
-];
-
-export const themeDisclaimers = [
-  "Shubham-ai-glitch mode activated.",
-  "System secured. Welcome to my terminal."
 ];
