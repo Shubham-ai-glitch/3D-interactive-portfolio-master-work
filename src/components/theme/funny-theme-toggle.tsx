@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import { useTheme } from "next-themes";
 import { themeDisclaimers } from "@/data/constants";
 import { useToast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils"; // Styling ke liye import kiya
 
-const FunnyThemeToggle = () => {
+interface FunnyThemeToggleProps {
+  className?: string; // Ye line error fix karegi
+}
+
+const FunnyThemeToggle = ({ className }: FunnyThemeToggleProps) => {
   const { setTheme, theme } = useTheme();
   const { toast } = useToast();
   const [counter, setCounter] = useState({ dark: 0, light: 0 });
@@ -26,9 +31,12 @@ const FunnyThemeToggle = () => {
   return (
     <button 
       onClick={toggleTheme}
-      className="p-2 border border-zinc-800 rounded-md text-xs font-mono hover:bg-zinc-900 transition-colors"
+      className={cn(
+        "p-2 border border-zinc-800 rounded-md text-xs font-mono hover:bg-zinc-900 transition-colors",
+        className
+      )}
     >
-      {theme === "light" ? "🌙 Go Dark" : "☀️ Go Light"}
+      {theme === "light" ? "🌙" : "☀️"}
     </button>
   );
 };
