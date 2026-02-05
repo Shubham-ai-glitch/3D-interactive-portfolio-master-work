@@ -1,15 +1,16 @@
 "use client";
 import React, { useState, Suspense } from "react";
 const Spline = React.lazy(() => import("@splinetool/react-spline"));
-// Make sure this path exactly matches your folder structure
+// Direct path fix
 import { SKILLS } from "../../data/constants"; 
 
 export default function SkillsSection() {
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
 
   function onSplineMouseDown(e: any) {
-    // Spline key tapping logic
-    const skill = SKILLS.find(s => s.name.toLowerCase() === e.target.name.toLowerCase());
+    // Ensuring SKILLS array exists before searching
+    const skillName = e.target.name.toLowerCase();
+    const skill = SKILLS?.find(s => s.name.toLowerCase() === skillName);
     if (skill) {
       setActiveSkill(skill.msg);
       setTimeout(() => setActiveSkill(null), 3000);
@@ -24,9 +25,9 @@ export default function SkillsSection() {
         )}
       </div>
       <div className="w-full h-[500px]">
-        <Suspense fallback={<div className="text-white text-center">Loading Keyboard...</div>}>
+        <Suspense fallback={<div className="text-zinc-500 text-center font-mono animate-pulse">Initializing Keyboard...</div>}>
           <Spline 
-            scene="https://prod.spline.design/your-scene-id/scene.splinecode" 
+            scene="https://prod.spline.design/79rBf89-72jUu86I/scene.splinecode" 
             onSplineMouseDown={onSplineMouseDown}
           />
         </Suspense>
