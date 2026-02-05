@@ -1,29 +1,10 @@
-export const themeDisclaimers = {
-  dark: [
-    "Shubham-ai-glitch mode activated.",
-    "System secured. Welcome to the dark side.",
-    "Eyes saved! Dark mode is on."
-  ],
-  light: [
-    "Flashbang! Light mode enabled.",
-    "System exposed. Brightness 100%.",
-    "Burning my eyes, but okay!"
-  ]
-};
-
-// Baaki SKILLS waisa hi rahega
-export type SkillNames = "React.js" | "Next.js" | "TypeScript" | "Python" | "Cybersecurity" | "Ethical Hacking";
-
-export interface Skill {
-  name: SkillNames;
-  color: string;
-}
-
-export const SKILLS: Skill[] = [
-  { name: "React.js", color: "#61dafb" },
-  { name: "Next.js", color: "#ffffff" },
-  { name: "TypeScript", color: "#007acc" },
-  { name: "Python", color: "#3776ab" },
-  { name: "Cybersecurity", color: "#4af626" },
-  { name: "Ethical Hacking", color: "#ff0000" },
+export const SKILLS = [
+  { name: "JS", color: "#f7df1e", msg: "JavaScript: Yeeting code into the DOM!" },
+  { name: "TS", color: "#3178c6", msg: "TypeScript: JavaScript's overachieving cousin." },
+  { name: "Next.js", color: "#ffffff", msg: "Next.js: The drama queen of frameworks." },
+  { name: "React", color: "#61dafb", msg: "React: Component-based magic." },
+  { name: "Tailwind", color: "#38b2ac", msg: "Tailwind: Utility classes hitting different." },
+  { name: "Node.js", color: "#339933", msg: "Node: JavaScript said 'sike, I'm backend now'." },
+  { name: "Java", color: "#f89820", msg: "Advance Java: Logic and architecture unlocked." },
+  { name: "Cyber", color: "#4af626", msg: "Cybersecurity: Certified CCEP defense." }
 ];
