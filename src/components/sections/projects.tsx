@@ -1,68 +1,46 @@
 "use client";
-import Image from "next/image";
 import React from "react";
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalTrigger,
-} from "../ui/animated-modal";
-import { Button } from "../ui/button"; // Ye line missing thi
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import projects from "@/data/projects"; 
+import Image from "next/image";
 
-const ProjectsSection = () => {
+const certs = [
+  { 
+    title: "Certified Cybersecurity Educator", 
+    img: "/assets/cert2.jpg", 
+    para: "Successfully qualified as a CCEP through Red Team Leaders, validating advanced proficiency in cybersecurity education and operations." 
+  },
+  { 
+    title: "Ethical Hacking Specialist", 
+    img: "/assets/cert1.jpg", 
+    para: "Awarded by Cyber Ethics Academy for mastering ethical hacking methodologies and proactive defense strategies on Dec 20, 2025." 
+  },
+  { 
+    title: "Advance Java Programming", 
+    img: "/assets/cert3.jpg", 
+    para: "Completed intensive Advance Java training from P-INFOWIZ, strengthening backend architecture skills on Jan 15, 2026." 
+  }
+];
+
+export default function ProjectsSection() {
   return (
-    <section id="projects" className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-      <Link href={"#projects"}>
-        <h2 className={cn(
-          "bg-clip-text text-4xl text-center font-bold tracking-tight text-transparent mb-12",
-          "bg-gradient-to-b from-black/80 to-black dark:from-white dark:to-white/20"
-        )}>
-          My Projects
-        </h2>
-      </Link>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project, index) => (
-          <Modal key={index}>
-            <ModalTrigger className="bg-transparent border border-zinc-800 rounded-xl overflow-hidden hover:scale-[1.02] transition-all group">
-              <div className="relative w-full aspect-video">
-                <Image
-                  src={project.src}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-4 text-left bg-zinc-900/50">
-                <h3 className="text-xl font-bold text-white">{project.title}</h3>
-                <p className="text-sm text-blue-400 font-mono mt-1">{project.category}</p>
-              </div>
-            </ModalTrigger>
-            
-            <ModalBody>
-              <ModalContent className="overflow-y-auto max-h-[80vh]">
-                <h2 className="text-2xl font-bold mb-4 text-white">{project.title}</h2>
-                <div className="text-zinc-400">
-                  {project.content}
-                </div>
-              </ModalContent>
-              <ModalFooter className="gap-4">
-                <Link href="https://github.com/Shubham-ai-glitch" target="_blank">
-                   <Button variant="outline" className="border-zinc-700 hover:bg-zinc-800">
-                     View Code
-                   </Button>
-                </Link>
-              </ModalFooter>
-            </ModalBody>
-          </Modal>
-        ))}
-      </div>
+    <section id="achievements" className="py-24 px-10 space-y-32 bg-zinc-950">
+      <h2 className="text-5xl font-bold text-center italic text-blue-500 uppercase tracking-tighter">My Achievements</h2>
+      {certs.map((item, i) => (
+        <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-20`}>
+          <div className="flex-1 group">
+            <Image 
+              src={item.img} 
+              alt={item.title} 
+              width={800} 
+              height={500} 
+              className="rounded-3xl border-2 border-zinc-800 grayscale group-hover:grayscale-0 transition-all duration-700 shadow-2xl shadow-blue-500/10" 
+            />
+          </div>
+          <div className="flex-1 space-y-6">
+            <h3 className="text-4xl font-bold text-white tracking-widest uppercase">{item.title}</h3>
+            <p className="text-zinc-400 text-xl leading-relaxed font-mono italic">{item.para}</p>
+          </div>
+        </div>
+      ))}
     </section>
   );
-};
-
-export default ProjectsSection;
+}
