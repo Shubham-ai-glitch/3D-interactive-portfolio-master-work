@@ -1,20 +1,25 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
+// Import hata kar direct load karenge taaki build error na aaye
 const Spline = React.lazy(() => import("@splinetool/react-spline"));
 
 export default function AnimatedBackground() {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true); // Sirf browser ready hone par load hoga
+    setMounted(true); // Sirf client-side par render hoga
   }, []);
 
-  if (!isLoaded) return <div className="bg-black w-full h-full" />;
+  // Jab tak page load na ho, sirf black background dikhao
+  if (!mounted) return <div className="w-full h-full bg-black" />;
 
   return (
-    <div className="w-full h-full">
-      <Suspense fallback={<div className="bg-black w-full h-full flex items-center justify-center text-white font-mono">Loading 3D Scene...</div>}>
-        <Spline scene="https://prod.spline.design/your-scene-id/scene.splinecode" />
+    <div className="w-full h-full min-h-[500px]">
+      <Suspense fallback={<div className="w-full h-full bg-black flex items-center justify-center text-blue-500 font-mono animate-pulse">BOOTING SYSTEM...</div>}>
+        <Spline 
+          scene="https://prod.spline.design/your-scene-id/scene.splinecode" 
+          className="w-full h-full"
+        />
       </Suspense>
     </div>
   );
