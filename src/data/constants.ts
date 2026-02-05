@@ -1,3 +1,4 @@
+// Error fix: Exporting Skill and SkillNames
 export type SkillNames = "JS" | "TS" | "Nextjs" | "React" | "Java" | "Cyber";
 
 export interface Skill {
