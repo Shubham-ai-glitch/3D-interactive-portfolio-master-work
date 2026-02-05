@@ -1,4 +1,4 @@
-// Explicit exports to fix "@data/constants has no exported member named Skill" error
+// Explicitly exporting types to fix Netlify "no exported member" error
 export type SkillNames = "JS" | "TS" | "Nextjs" | "React" | "Java" | "Cyber";
 
 export interface Skill {
@@ -17,14 +17,6 @@ export const SKILLS: Skill[] = [
 ];
 
 export const themeDisclaimers = {
-  dark: [
-    "Shubham-ai-glitch mode activated.",
-    "System secured. Welcome to the dark side.",
-    "Eyes saved! Dark mode is on."
-  ],
-  light: [
-    "Flashbang! Light mode enabled.",
-    "System exposed. Brightness 100%.",
-    "Burning my eyes, but okay!"
-  ]
+  dark: ["Shubham-ai-glitch mode activated.", "System secured.", "Dark mode is on."],
+  light: ["Flashbang! Light mode enabled.", "Brightness 100%.", "Burning my eyes!"]
 };
