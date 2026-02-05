@@ -1,4 +1,4 @@
-// Error fix: Exporting Skill and SkillNames
+// Explicit exports to fix Netlify Type Error
 export type SkillNames = "JS" | "TS" | "Nextjs" | "React" | "Java" | "Cyber";
 
 export interface Skill {
