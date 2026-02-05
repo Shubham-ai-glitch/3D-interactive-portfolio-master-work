@@ -1,46 +1,21 @@
 "use client";
-import React, { Suspense, useEffect, useRef, useState, useCallback } from "react";
-import { Application, SPEObject } from "@splinetool/runtime";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { Suspense, useEffect, useState } from "react";
 const Spline = React.lazy(() => import("@splinetool/react-spline"));
-import { Skill, SkillNames, SKILLS } from "@/data/constants";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { usePreloader } from "./preloader";
-
-gsap.registerPlugin(ScrollTrigger);
-
-// ... STATES wala logic waisa hi rahega ...
 
 export default function AnimatedBackground() {
-  const splineRef = useRef<Application | null>(null);
-  const { isLoading } = usePreloader();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
-
-  const onLoad = useCallback((splineApp: Application) => {
-    splineRef.current = splineApp;
-  }, []);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (splineRef.current && !isLoading) {
-      // GSAP Animations with ScrollTrigger
-      ScrollTrigger.create({
-        trigger: "#hero",
-        start: "top top",
-        onEnter: () => {
-          // Hero state logic
-        }
-      });
-    }
-  }, [isLoading, isDesktop]); // Dependencies fixed for Netlify
+    setMounted(true); // Sirf browser mein load hoga
+  }, []);
+
+  if (!mounted) return <div className="bg-black w-full h-full" />;
 
   return (
-    <div className="fixed inset-0 -z-10 bg-black">
-      <Suspense fallback={<div className="bg-black w-full h-full" />}>
-        <Spline
-          scene="/assets/skills-keyboard.spline" // Make sure this path is correct
-          onLoad={onLoad}
-        />
+    <div className="w-full h-full">
+      <Suspense fallback={<div className="bg-black w-full h-full animate-pulse text-white flex items-center justify-center font-mono">Loading 3D Keyboard...</div>}>
+        {/* Aapka asli scene URL yahan aayega */}
+        <Spline scene="https://prod.spline.design/your-scene-id/scene.splinecode" />
       </Suspense>
     </div>
   );
