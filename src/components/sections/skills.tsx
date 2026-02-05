@@ -1,31 +1,42 @@
-import Link from "next/link";
-import React from "react";
-import { BoxReveal } from "../reveal-animations";
-import { cn } from "@/lib/utils";
+"use client";
+import React, { useState, Suspense } from "react";
+const Spline = React.lazy(() => import("@splinetool/react-spline"));
+import { SKILLS } from "@/data/constants";
 
-const SkillsSection = () => {
+export default function SkillsSection() {
+  const [activeSkill, setActiveSkill] = useState<string | null>(null);
+
+  // Jab key tap hogi, ye function trigger hoga
+  function onSplineMouseDown(e: any) {
+    const skill = SKILLS.find(s => s.name.toLowerCase() === e.target.name.toLowerCase());
+    if (skill) {
+      setActiveSkill(skill.msg);
+      // 3 second baad message gayab ho jayega
+      setTimeout(() => setActiveSkill(null), 3000);
+    }
+  }
+
   return (
-    <section id="skills" className="w-full h-screen md:h-[150dvh]">
-      <div className="top-[70px] sticky mb-96">
-        <Link href={"#skills"}>
-          <BoxReveal width="100%">
-            <h2
-              className={cn(
-                "bg-clip-text text-4xl text-center text-transparent md:text-7xl",
-                "bg-gradient-to-b from-black/80 to-black/50",
-                "dark:bg-gradient-to-b dark:from-white/80 dark:to-white/20 dark:bg-opacity-50 "
-              )}
-            >
-              SKILLS
-            </h2>
-          </BoxReveal>
-        </Link>
-        <p className="mx-auto mt-4 line-clamp-4 max-w-3xl font-normal text-base text-center text-neutral-300">
-          (hint: press a key)
+    <section id="skills" className="py-24 bg-black flex flex-col items-center justify-center min-h-screen">
+      <div className="text-center mb-10">
+        <h2 className="text-5xl font-bold text-white uppercase italic tracking-tighter">Skills</h2>
+        <p className="text-zinc-500 font-mono mt-2">
+          {activeSkill ? (
+            <span className="text-blue-400 animate-bounce block text-2xl">{activeSkill}</span>
+          ) : (
+            "(hint: press a key on the keyboard)"
+          )}
         </p>
+      </div>
+
+      <div className="w-full h-[500px] md:h-[700px]">
+        <Suspense fallback={<div className="text-white text-center">Loading Keyboard...</div>}>
+          <Spline 
+            scene="https://prod.spline.design/your-scene-id/scene.splinecode" 
+            onSplineMouseDown={onSplineMouseDown}
+          />
+        </Suspense>
       </div>
     </section>
   );
-};
-
-export default SkillsSection;
+}
