@@ -1,4 +1,4 @@
-// Explicitly exporting types to fix Netlify build error
+// Explicit exports to fix "@data/constants has no exported member named Skill" error
 export type SkillNames = "JS" | "TS" | "Nextjs" | "React" | "Java" | "Cyber";
 
 export interface Skill {
