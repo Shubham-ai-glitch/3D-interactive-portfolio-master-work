@@ -6,17 +6,17 @@ const certs = [
   { 
     title: "Certified Cybersecurity Educator", 
     img: "/assets/cert2.jpg", 
-    para: "Successfully qualified as a Certified Cybersecurity Educator Professional (CCEP) through Red Team Leaders on December 7, 2025. This confirms my expertise in red team operations and security training." 
+    para: "Successfully qualified as a CCEP through Red Team Leaders on Dec 7, 2025. Validates expertise in red team operations." 
   },
   { 
     title: "Cybersecurity & Ethical Hacking", 
     img: "/assets/cert1.jpg", 
-    para: "Awarded by Cyber Ethics Academy on December 20, 2025. Mastered ethical hacking methodologies and defense strategies to safeguard digital assets." 
+    para: "Awarded by Cyber Ethics Academy on Dec 20, 2025. Mastered ethical hacking and proactive defense strategies." 
   },
   { 
     title: "Advance Java (online)", 
     img: "/assets/cert3.jpg", 
-    para: "Completed an intensive Advance Java course from P-INFOWIZ on January 15, 2026. Strengthened backend foundation for building scalable software solutions." 
+    para: "Completed Advance Java course from P-INFOWIZ on Jan 15, 2026. Specialized in scalable software solutions." 
   }
 ];
 
