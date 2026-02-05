@@ -1,5 +1,6 @@
 // @/data/constants.ts
 
+// Ye types export hona sabse zaroori hain build ke liye
 export type SkillNames = "JS" | "TS" | "Nextjs" | "React" | "Java" | "Cyber";
 
 export interface Skill {
